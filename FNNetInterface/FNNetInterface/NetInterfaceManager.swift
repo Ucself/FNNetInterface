@@ -41,7 +41,12 @@ public class NetInterfaceManager: NSObject {
             return ;
         }
         
-        self.httpRequst(params.method!, strUrl: url!, body: params.data as! NSDictionary, isHttps: isHttps, requestType: type)
+        var bodyDic:NSDictionary = [:];
+        if params.data != nil {
+            bodyDic = (params.data as? NSDictionary)!
+        }
+        
+        self.httpRequst(params.method!, strUrl: url!, body:bodyDic, isHttps: isHttps, requestType: type)
     }
     
     
@@ -56,10 +61,11 @@ public class NetInterfaceManager: NSObject {
     //MARK: Private Request
     private func httpRequst(requestMothed:EMRequstMethod,
                         strUrl:String,
-                        body:NSDictionary,
+                        body:NSDictionary?,
                         isHttps:Bool,
                         requestType:Int) -> Void{
         
+        print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
         NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
             
                 self.successHander(msg, reqestType: requestType)
@@ -74,7 +80,7 @@ public class NetInterfaceManager: NSObject {
                             body:NSDictionary,
                             isHttps:Bool,
                             requestType:Int) -> Void{
-        
+        print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
         NetInterface.shareInstance.httpPostFormRequest(strUrl, body: body, isHttps: isHttps, successBlock: { (msg) in
             
             self.successHander(msg, reqestType: requestType)
@@ -87,8 +93,10 @@ public class NetInterfaceManager: NSObject {
     
     //返回成功处理
     private func successHander(msg:String, reqestType:Int) ->Void{
+        print("<- \(__FUNCTION__) ->\n   msg:\(msg)\n" + "   reqestType:\(reqestType)");
+        var error:NSError?
         let data:NSData = msg.dataUsingEncoding(NSUTF8StringEncoding)!
-        let dict:NSDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data)! as! NSDictionary
+        let dict:NSDictionary = try!  NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as! NSDictionary
         let result:ResultDataModel = ResultDataModel.initWithDictionary(dict, reqestType: reqestType)
         if result.code == EMResultCode.EmCode_Success.rawValue {
             dispatch_async(dispatch_get_main_queue()) {
@@ -104,7 +112,8 @@ public class NetInterfaceManager: NSObject {
     }
     //返回失败处理
     private func failedHander(error:NSError, reqestType:Int) ->Void{
-        dispatch_async(dispatch_get_main_queue()) { 
+        print("<- \(__FUNCTION__) ->\n   error:\(error)\n" + "   reqestType:\(reqestType)");
+        dispatch_async(dispatch_get_main_queue()) {
             let result:ResultDataModel = ResultDataModel.initWithErrorInfo(error, reqestType: reqestType)
             if result.code == EMResultCode.EmCode_TokenOverdue.rawValue{
                 NSNotificationCenter.defaultCenter().postNotificationName(KNotification_AuthenticationFail, object: result)

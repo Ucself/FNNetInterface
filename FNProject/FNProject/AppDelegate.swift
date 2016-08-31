@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FNNetInterface
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,21 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let netInterface:NetInterface = NetInterface.shareInstance
-        //get
-//        netInterface.httpRequest(.RequestMothed_Get, strUrl: "https://www.baidu.com", body: nil, isHttps: false, successBlock: { (seccessString) in
-//            NSLog("%@", seccessString)
-//            }) { (error) in
-//                NSLog("%@", error)
-//        }
-        
-        //form
-        netInterface.httpPostFormRequest("http://www.feiniubus.com/", body: ["key":"value"], isHttps: false, successBlock: { (seccessString) in
-            NSLog("%@", seccessString)
-            }) { (error) in
-                 NSLog("%@", error)
-        }
         
         return true
     }

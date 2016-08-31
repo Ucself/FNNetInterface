@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FNProject/FNProject/AppDelegate.swift"
-            timestampString = "494221689.8832"
+            filePath = "FNProject/FNProject/ViewController.swift"
+            timestampString = "494328649.25337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FNProject/FNProject/AppDelegate.swift"
-            timestampString = "494221692.602904"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "httpRequestFinished(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

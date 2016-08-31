@@ -15,8 +15,8 @@ public enum EMRequstMethod:Int {
 
 public class NetParams: NSObject {
     
-    var method:EMRequstMethod?;  //请求方式
-    var data:AnyObject?;          //请求数据
+    public var method:EMRequstMethod?;  //请求方式
+    public var data:AnyObject?;          //请求数据
     public override init() {
         super.init();
         method = .EMRequstMethod_GET;
