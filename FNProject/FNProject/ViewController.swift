@@ -79,17 +79,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func httpRequestFinished(notification:NSNotification) -> Void {
         let resultData:ResultDataModel = notification.object as! ResultDataModel
-        let alert:UIAlertView = UIAlertView.init();
-        alert.title = "返回成功";
-        alert.message = resultData.message;
-        alert.show()
+        let alert:UIAlertController = UIAlertController.init(title: "返回成功", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.message = "详情看打印日志" + resultData.message!;
+        let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true) { }
     }
     func httpRequestFailed(notification:NSNotification) -> Void {
         let resultData:ResultDataModel = notification.object as! ResultDataModel
-        let alert:UIAlertView = UIAlertView.init();
-        alert.title = "返回失败";
-        alert.message = resultData.message;
-        alert.show()
+        let alert:UIAlertController = UIAlertController.init(title: "返回失败", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.message = "详情看打印日志" + resultData.message!;
+        let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true) { }
         
     }
 }

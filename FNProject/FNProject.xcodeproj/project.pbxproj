@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A19E7701D771A9400062891 /* FNNetInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19E76F1D771A9400062891 /* FNNetInterface.framework */; };
+		8A19E7711D771A9400062891 /* FNNetInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19E76F1D771A9400062891 /* FNNetInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADE95B0D1D7408FE003B416E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B0C1D7408FE003B416E /* AppDelegate.swift */; };
 		ADE95B0F1D7408FE003B416E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B0E1D7408FE003B416E /* ViewController.swift */; };
 		ADE95B121D7408FE003B416E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE95B101D7408FE003B416E /* Main.storyboard */; };
@@ -14,8 +16,6 @@
 		ADE95B171D7408FE003B416E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE95B151D7408FE003B416E /* LaunchScreen.storyboard */; };
 		ADE95B221D7408FE003B416E /* FNProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B211D7408FE003B416E /* FNProjectTests.swift */; };
 		ADE95B2D1D7408FE003B416E /* FNProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B2C1D7408FE003B416E /* FNProjectUITests.swift */; };
-		ADE95E8F1D7520D7003B416E /* FNNetInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE95E8E1D7520D7003B416E /* FNNetInterface.framework */; };
-		ADE95E901D7520D7003B416E /* FNNetInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ADE95E8E1D7520D7003B416E /* FNNetInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				ADE95E901D7520D7003B416E /* FNNetInterface.framework in Embed Frameworks */,
+				8A19E7711D771A9400062891 /* FNNetInterface.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A19E76F1D771A9400062891 /* FNNetInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FNNetInterface.framework; path = "/Users/libj/Library/Developer/Xcode/DerivedData/SwiftNet-cmvsswlpmikdorevirqzpcqoenfw/Build/Products/Debug-iphonesimulator/FNNetInterface.framework"; sourceTree = "<absolute>"; };
 		ADE95B091D7408FE003B416E /* FNProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FNProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE95B0C1D7408FE003B416E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE95B0E1D7408FE003B416E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +64,6 @@
 		ADE95B281D7408FE003B416E /* FNProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FNProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE95B2C1D7408FE003B416E /* FNProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FNProjectUITests.swift; sourceTree = "<group>"; };
 		ADE95B2E1D7408FE003B416E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADE95E8E1D7520D7003B416E /* FNNetInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FNNetInterface.framework; path = "/Users/yidafeiniu/Library/Developer/Xcode/DerivedData/SwiftNet-ddgvkgcxnvlkylcbkqvmeunqyljp/Build/Products/Debug-iphoneos/FNNetInterface.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADE95E8F1D7520D7003B416E /* FNNetInterface.framework in Frameworks */,
+				8A19E7701D771A9400062891 /* FNNetInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +95,7 @@
 		ADE95B001D7408FE003B416E = {
 			isa = PBXGroup;
 			children = (
-				ADE95E8E1D7520D7003B416E /* FNNetInterface.framework */,
+				8A19E76F1D771A9400062891 /* FNNetInterface.framework */,
 				ADE95B0B1D7408FE003B416E /* FNProject */,
 				ADE95B201D7408FE003B416E /* FNProjectTests */,
 				ADE95B2B1D7408FE003B416E /* FNProjectUITests */,
