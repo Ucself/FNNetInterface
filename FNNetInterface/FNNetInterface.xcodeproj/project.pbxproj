@@ -1,0 +1,508 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADE95E4B1D742611003B416E /* FNNetInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = ADE95E4A1D742611003B416E /* FNNetInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADE95E521D742611003B416E /* FNNetInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE95E471D742611003B416E /* FNNetInterface.framework */; };
+		ADE95E571D742611003B416E /* FNNetInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E561D742611003B416E /* FNNetInterfaceTests.swift */; };
+		ADE95E771D742639003B416E /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E621D742639003B416E /* Alamofire.swift */; };
+		ADE95E781D742639003B416E /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E631D742639003B416E /* Download.swift */; };
+		ADE95E791D742639003B416E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E641D742639003B416E /* Error.swift */; };
+		ADE95E7A1D742639003B416E /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E651D742639003B416E /* Manager.swift */; };
+		ADE95E7B1D742639003B416E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E661D742639003B416E /* MultipartFormData.swift */; };
+		ADE95E7C1D742639003B416E /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E671D742639003B416E /* NetworkReachabilityManager.swift */; };
+		ADE95E7D1D742639003B416E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E681D742639003B416E /* Notifications.swift */; };
+		ADE95E7E1D742639003B416E /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E691D742639003B416E /* ParameterEncoding.swift */; };
+		ADE95E7F1D742639003B416E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6A1D742639003B416E /* Request.swift */; };
+		ADE95E801D742639003B416E /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6B1D742639003B416E /* Response.swift */; };
+		ADE95E811D742639003B416E /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6C1D742639003B416E /* ResponseSerialization.swift */; };
+		ADE95E821D742639003B416E /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6D1D742639003B416E /* Result.swift */; };
+		ADE95E831D742639003B416E /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6E1D742639003B416E /* ServerTrustPolicy.swift */; };
+		ADE95E841D742639003B416E /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E6F1D742639003B416E /* Stream.swift */; };
+		ADE95E851D742639003B416E /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E701D742639003B416E /* Timeline.swift */; };
+		ADE95E861D742639003B416E /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E711D742639003B416E /* Upload.swift */; };
+		ADE95E871D742639003B416E /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E721D742639003B416E /* Validation.swift */; };
+		ADE95E881D742639003B416E /* NetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E731D742639003B416E /* NetInterface.swift */; };
+		ADE95E891D742639003B416E /* NetInterfaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E741D742639003B416E /* NetInterfaceManager.swift */; };
+		ADE95E8A1D742639003B416E /* NetParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E751D742639003B416E /* NetParams.swift */; };
+		ADE95E8B1D742639003B416E /* UrlMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E761D742639003B416E /* UrlMaps.swift */; };
+		ADE95E931D755F15003B416E /* ResultDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95E921D755F15003B416E /* ResultDataModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADE95E531D742611003B416E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADE95E3E1D742611003B416E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADE95E461D742611003B416E;
+			remoteInfo = FNNetInterface;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ADE95E471D742611003B416E /* FNNetInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FNNetInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE95E4A1D742611003B416E /* FNNetInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FNNetInterface.h; sourceTree = "<group>"; };
+		ADE95E4C1D742611003B416E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE95E511D742611003B416E /* FNNetInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FNNetInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE95E561D742611003B416E /* FNNetInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FNNetInterfaceTests.swift; sourceTree = "<group>"; };
+		ADE95E581D742611003B416E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE95E621D742639003B416E /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		ADE95E631D742639003B416E /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		ADE95E641D742639003B416E /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		ADE95E651D742639003B416E /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		ADE95E661D742639003B416E /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		ADE95E671D742639003B416E /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		ADE95E681D742639003B416E /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		ADE95E691D742639003B416E /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		ADE95E6A1D742639003B416E /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		ADE95E6B1D742639003B416E /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		ADE95E6C1D742639003B416E /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
+		ADE95E6D1D742639003B416E /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		ADE95E6E1D742639003B416E /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		ADE95E6F1D742639003B416E /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		ADE95E701D742639003B416E /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		ADE95E711D742639003B416E /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		ADE95E721D742639003B416E /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		ADE95E731D742639003B416E /* NetInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetInterface.swift; sourceTree = "<group>"; };
+		ADE95E741D742639003B416E /* NetInterfaceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetInterfaceManager.swift; sourceTree = "<group>"; };
+		ADE95E751D742639003B416E /* NetParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetParams.swift; sourceTree = "<group>"; };
+		ADE95E761D742639003B416E /* UrlMaps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlMaps.swift; sourceTree = "<group>"; };
+		ADE95E921D755F15003B416E /* ResultDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultDataModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADE95E431D742611003B416E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE95E4E1D742611003B416E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE95E521D742611003B416E /* FNNetInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADE95E3D1D742611003B416E = {
+			isa = PBXGroup;
+			children = (
+				ADE95E491D742611003B416E /* FNNetInterface */,
+				ADE95E551D742611003B416E /* FNNetInterfaceTests */,
+				ADE95E481D742611003B416E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADE95E481D742611003B416E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E471D742611003B416E /* FNNetInterface.framework */,
+				ADE95E511D742611003B416E /* FNNetInterfaceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADE95E491D742611003B416E /* FNNetInterface */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E4A1D742611003B416E /* FNNetInterface.h */,
+				ADE95E731D742639003B416E /* NetInterface.swift */,
+				ADE95E741D742639003B416E /* NetInterfaceManager.swift */,
+				ADE95E751D742639003B416E /* NetParams.swift */,
+				ADE95E761D742639003B416E /* UrlMaps.swift */,
+				ADE95E921D755F15003B416E /* ResultDataModel.swift */,
+				ADE95E611D742639003B416E /* Alamofire */,
+				ADE95E4C1D742611003B416E /* Info.plist */,
+			);
+			path = FNNetInterface;
+			sourceTree = "<group>";
+		};
+		ADE95E551D742611003B416E /* FNNetInterfaceTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E561D742611003B416E /* FNNetInterfaceTests.swift */,
+				ADE95E581D742611003B416E /* Info.plist */,
+			);
+			path = FNNetInterfaceTests;
+			sourceTree = "<group>";
+		};
+		ADE95E611D742639003B416E /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E621D742639003B416E /* Alamofire.swift */,
+				ADE95E8C1D742B1D003B416E /* Core */,
+				ADE95E8D1D742B32003B416E /* Features */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		ADE95E8C1D742B1D003B416E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E641D742639003B416E /* Error.swift */,
+				ADE95E651D742639003B416E /* Manager.swift */,
+				ADE95E681D742639003B416E /* Notifications.swift */,
+				ADE95E691D742639003B416E /* ParameterEncoding.swift */,
+				ADE95E6A1D742639003B416E /* Request.swift */,
+				ADE95E6B1D742639003B416E /* Response.swift */,
+				ADE95E6D1D742639003B416E /* Result.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		ADE95E8D1D742B32003B416E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				ADE95E631D742639003B416E /* Download.swift */,
+				ADE95E661D742639003B416E /* MultipartFormData.swift */,
+				ADE95E671D742639003B416E /* NetworkReachabilityManager.swift */,
+				ADE95E6C1D742639003B416E /* ResponseSerialization.swift */,
+				ADE95E6E1D742639003B416E /* ServerTrustPolicy.swift */,
+				ADE95E6F1D742639003B416E /* Stream.swift */,
+				ADE95E701D742639003B416E /* Timeline.swift */,
+				ADE95E711D742639003B416E /* Upload.swift */,
+				ADE95E721D742639003B416E /* Validation.swift */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ADE95E441D742611003B416E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE95E4B1D742611003B416E /* FNNetInterface.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ADE95E461D742611003B416E /* FNNetInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE95E5B1D742611003B416E /* Build configuration list for PBXNativeTarget "FNNetInterface" */;
+			buildPhases = (
+				ADE95E421D742611003B416E /* Sources */,
+				ADE95E431D742611003B416E /* Frameworks */,
+				ADE95E441D742611003B416E /* Headers */,
+				ADE95E451D742611003B416E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FNNetInterface;
+			productName = FNNetInterface;
+			productReference = ADE95E471D742611003B416E /* FNNetInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ADE95E501D742611003B416E /* FNNetInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE95E5E1D742611003B416E /* Build configuration list for PBXNativeTarget "FNNetInterfaceTests" */;
+			buildPhases = (
+				ADE95E4D1D742611003B416E /* Sources */,
+				ADE95E4E1D742611003B416E /* Frameworks */,
+				ADE95E4F1D742611003B416E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADE95E541D742611003B416E /* PBXTargetDependency */,
+			);
+			name = FNNetInterfaceTests;
+			productName = FNNetInterfaceTests;
+			productReference = ADE95E511D742611003B416E /* FNNetInterfaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADE95E3E1D742611003B416E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = FN;
+				TargetAttributes = {
+					ADE95E461D742611003B416E = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					ADE95E501D742611003B416E = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = ADE95E411D742611003B416E /* Build configuration list for PBXProject "FNNetInterface" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ADE95E3D1D742611003B416E;
+			productRefGroup = ADE95E481D742611003B416E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADE95E461D742611003B416E /* FNNetInterface */,
+				ADE95E501D742611003B416E /* FNNetInterfaceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADE95E451D742611003B416E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE95E4F1D742611003B416E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADE95E421D742611003B416E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE95E771D742639003B416E /* Alamofire.swift in Sources */,
+				ADE95E7D1D742639003B416E /* Notifications.swift in Sources */,
+				ADE95E931D755F15003B416E /* ResultDataModel.swift in Sources */,
+				ADE95E891D742639003B416E /* NetInterfaceManager.swift in Sources */,
+				ADE95E7E1D742639003B416E /* ParameterEncoding.swift in Sources */,
+				ADE95E881D742639003B416E /* NetInterface.swift in Sources */,
+				ADE95E851D742639003B416E /* Timeline.swift in Sources */,
+				ADE95E791D742639003B416E /* Error.swift in Sources */,
+				ADE95E801D742639003B416E /* Response.swift in Sources */,
+				ADE95E831D742639003B416E /* ServerTrustPolicy.swift in Sources */,
+				ADE95E781D742639003B416E /* Download.swift in Sources */,
+				ADE95E821D742639003B416E /* Result.swift in Sources */,
+				ADE95E871D742639003B416E /* Validation.swift in Sources */,
+				ADE95E7A1D742639003B416E /* Manager.swift in Sources */,
+				ADE95E8A1D742639003B416E /* NetParams.swift in Sources */,
+				ADE95E7C1D742639003B416E /* NetworkReachabilityManager.swift in Sources */,
+				ADE95E811D742639003B416E /* ResponseSerialization.swift in Sources */,
+				ADE95E861D742639003B416E /* Upload.swift in Sources */,
+				ADE95E7F1D742639003B416E /* Request.swift in Sources */,
+				ADE95E7B1D742639003B416E /* MultipartFormData.swift in Sources */,
+				ADE95E8B1D742639003B416E /* UrlMaps.swift in Sources */,
+				ADE95E841D742639003B416E /* Stream.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE95E4D1D742611003B416E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE95E571D742611003B416E /* FNNetInterfaceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADE95E541D742611003B416E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADE95E461D742611003B416E /* FNNetInterface */;
+			targetProxy = ADE95E531D742611003B416E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADE95E591D742611003B416E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ADE95E5A1D742611003B416E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		ADE95E5C1D742611003B416E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FNNetInterface/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FN.FNNetInterface;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ADE95E5D1D742611003B416E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FNNetInterface/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FN.FNNetInterface;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ADE95E5F1D742611003B416E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FNNetInterfaceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FN.FNNetInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ADE95E601D742611003B416E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FNNetInterfaceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FN.FNNetInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADE95E411D742611003B416E /* Build configuration list for PBXProject "FNNetInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE95E591D742611003B416E /* Debug */,
+				ADE95E5A1D742611003B416E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE95E5B1D742611003B416E /* Build configuration list for PBXNativeTarget "FNNetInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE95E5C1D742611003B416E /* Debug */,
+				ADE95E5D1D742611003B416E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ADE95E5E1D742611003B416E /* Build configuration list for PBXNativeTarget "FNNetInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE95E5F1D742611003B416E /* Debug */,
+				ADE95E601D742611003B416E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADE95E3E1D742611003B416E /* Project object */;
+}
