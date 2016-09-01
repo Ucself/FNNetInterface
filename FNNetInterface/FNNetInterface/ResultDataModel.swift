@@ -40,9 +40,9 @@ public class ResultDataModel: NSObject {
             return resultDataModelObject;
         }
         
-        resultDataModelObject.code = dict!["code"] == nil ? dict!["code"]!.integerValue : EMResultCode.EmCode_Success.rawValue;
-        resultDataModelObject.data = dict!["data"] == nil ? dict!["data"] : dict!;
-        resultDataModelObject.message = dict!["message"] as! String
+        resultDataModelObject.code = dict!["code"] != nil ? dict!["code"]!.integerValue : EMResultCode.EmCode_Success.rawValue;
+        resultDataModelObject.data = dict!["data"] != nil ? dict!["data"] : dict!;
+        resultDataModelObject.message = dict!["message"] as? String ?? "unkonw"
         resultDataModelObject.type = reqestType
         
         if resultDataModelObject.code != EMResultCode.EmCode_Success.rawValue {

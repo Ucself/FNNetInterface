@@ -50,6 +50,30 @@ public class NetInterfaceManager: NSObject {
     }
     
     
+    
+    public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void), _ isHttps:Bool = false) -> Void{
+        let params:NetParams = NetParams.init()
+        
+        block(params: params);
+        let url:String? = UrlMaps.shareInstance.urlWithTypeNew(type);
+        if (url == nil || url!.characters.count <= 0) {
+            return ;
+        }
+        
+        var bodyDic:NSDictionary = [:];
+        if params.data != nil {
+            bodyDic = (params.data as? NSDictionary)!
+        }
+        
+        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl: url!, body: bodyDic as! [String:AnyObject] , isHttps: true, successBlock: { (msg) in
+            self.successHander(msg, reqestType: type)
+            }, failedBlock: { (error) in
+                self.failedHander(error, reqestType: type)
+            }, true)
+    
+    }
+    
+    
     public func uploadImage(strurl:String,
                             img:UIImage,
                             body:NSDictionary?,
@@ -67,28 +91,22 @@ public class NetInterfaceManager: NSObject {
         
         print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
         NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
-            
-                self.successHander(msg, reqestType: requestType)
-            
-            }) { (error) in
-                
-                self.failedHander(error, reqestType: requestType)
-        }
-    }
-    private func httpPostFormRequest(requestMothed:EMRequstMethod,
-                            strUrl:String,
-                            body:NSDictionary,
-                            isHttps:Bool,
-                            requestType:Int) -> Void{
-        print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
-        NetInterface.shareInstance.httpPostFormRequest(strUrl, body: body, isHttps: isHttps, successBlock: { (msg) in
-            
             self.successHander(msg, reqestType: requestType)
-            
-            }) { (error) in
+            }, failedBlock: { (error) in
                 self.failedHander(error, reqestType: requestType)
-        }
+            }, false)
     }
+//    private func httpPostFormRequest(strUrl:String,
+//                                    body:NSDictionary,
+//                                    isHttps:Bool,
+//                                    requestType:Int) -> Void{
+//        print("<- \(__FUNCTION__) ->\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
+//        NetInterface.shareInstance.httpRequest(.EMRequstMethod_POST, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
+//            self.successHander(msg, reqestType: requestType)
+//            }, failedBlock: { (error) in
+//                self.failedHander(error, reqestType: requestType)
+//            }, true)
+//    }
     
     
     //返回成功处理
@@ -96,7 +114,13 @@ public class NetInterfaceManager: NSObject {
         print("<- \(__FUNCTION__) ->\n   msg:\(msg)\n" + "   reqestType:\(reqestType)");
         var error:NSError?
         let data:NSData = msg.dataUsingEncoding(NSUTF8StringEncoding)!
-        let dict:NSDictionary = try!  NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as! NSDictionary
+        let dict:NSDictionary?
+        do{
+            dict = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as! NSDictionary
+        }
+        catch{
+            dict = ["":""]
+        }
         let result:ResultDataModel = ResultDataModel.initWithDictionary(dict, reqestType: reqestType)
         if result.code == EMResultCode.EmCode_Success.rawValue {
             dispatch_async(dispatch_get_main_queue()) {
