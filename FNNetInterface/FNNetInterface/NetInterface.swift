@@ -27,37 +27,17 @@ public class NetInterface: NSObject {
                             body :[String: AnyObject]?,
                             isHttps:Bool,
                             successBlock:((String) ->Void),
-                            failedBlock:((NSError) ->Void),
-                            _ isForm: Bool) ->Void {
+                            failedBlock:((String, NSError) ->Void),
+                            _ isForm: Bool = false) ->Void {
         //证书绕过验证
         if isHttps {
-            let manager = Manager.sharedInstance
-            manager.delegate.sessionDidReceiveChallenge = { session, challenge in
-                var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
-                var credential: NSURLCredential?
-                
-                if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-                    disposition = NSURLSessionAuthChallengeDisposition.UseCredential
-                    credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
-                } else {
-                    if challenge.previousFailureCount > 0 {
-                        disposition = .CancelAuthenticationChallenge
-                    } else {
-                        credential = manager.session.configuration.URLCredentialStorage?.defaultCredentialForProtectionSpace(challenge.protectionSpace)
-                        
-                        if credential != nil {
-                            disposition = .UseCredential
-                        }
-                    }
-                }
-                return (disposition, credential)
-            }
+            self.passCertificate();
         }
         if isForm {
             httpHeader["Content-Type"] = "application/x-www-form-urlencoded"
         }
         else{
-            httpHeader.removeValueForKey("Content-Type")
+            httpHeader["Content-Type"] = "text/html"
         }
         let postRequest:Request?;
         switch requstMethod {
@@ -71,101 +51,64 @@ public class NetInterface: NSObject {
             postRequest = Manager.sharedInstance.request(.DELETE,strUrl, parameters:body, headers: httpHeader);
             
         }
-        
-        postRequest!.responseString { (response) in
-            if let resultString = response.result.value{
-                successBlock(resultString)
-            }
-            else{
-                failedBlock(response.result.error!)
-            }
-        }
-        postRequest!.validate()
-                    .responseJSON { response in
+        postRequest!.validate(statusCode: 200..<300)
+                    .responseData { (response) in
+                        let responseData = response.data
+                        let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
                         switch response.result {
                         case .Success:
-                            successBlock(response.result.value as! String)
+                            successBlock(responseString)
                         case .Failure(let error):
-                            failedBlock(error)
-                        }
-        }
-        
-    
-    }
-    
-    public func httpPostFormRequest(strUrl:String,
-                                    body :NSDictionary?,
-                                    isHttps:Bool,
-                                    successBlock:((String) ->Void),
-                                    failedBlock:((NSError) ->Void)) ->Void {
-        
-        //证书绕过验证
-        if isHttps {
-            let manager = Manager.sharedInstance
-            manager.delegate.sessionDidReceiveChallenge = { session, challenge in
-                var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
-                var credential: NSURLCredential?
-                
-                if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-                    disposition = NSURLSessionAuthChallengeDisposition.UseCredential
-                    credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
-                } else {
-                    if challenge.previousFailureCount > 0 {
-                        disposition = .CancelAuthenticationChallenge
-                    } else {
-                        credential = manager.session.configuration.URLCredentialStorage?.defaultCredentialForProtectionSpace(challenge.protectionSpace)
-                        
-                        if credential != nil {
-                            disposition = .UseCredential
+                            failedBlock(responseString, error)
                         }
                     }
-                }
-                return (disposition, credential)
-            }
-        }
-        
-        Manager.sharedInstance.upload(.POST, strUrl, multipartFormData: { (multipartFormData) in
-            for (key,value) in body!{
-                let dataValue : NSData = NSKeyedArchiver.archivedDataWithRootObject(value)
-                multipartFormData.appendBodyPart(data: dataValue, name: key as! String)
-            }
-            
-            }) { (encodingResult) in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON { response in
-                        if let error = response.result.error {
-                            failedBlock(error)
-                        }
-                        else{
-                            successBlock(response.result.value as! String)
-                        }
-                    }
-                case .Failure(let encodingError):
-                    failedBlock(encodingError as NSError)
-                }
-        }
-        
     }
-
     public func uploadImage(strUrl:String,
                             body:NSDictionary?,
                             img:UIImage,
                             successBlock:((String) ->Void),
-                            failedBlock:((NSError) ->Void))->Void{
+                            failedBlock:((NSString, NSError) ->Void))->Void{
         let dataValue : NSData = UIImageJPEGRepresentation(img, 0.5)!
+        httpHeader["Content-Type"] = "image/jpeg"
         let postRequest:Request = Manager.sharedInstance.upload(.POST, strUrl, headers: httpHeader, data:dataValue)
         //数据返回
-        postRequest.responseString { (response) in
-            if let resultString = response.result.value{
-                successBlock(resultString)
-            }
-            else{
-                failedBlock(response.result.error!)
-            }
-        }
+        postRequest.validate(statusCode: 200..<300)
+                   .responseData { (response) in
+                        let responseData = response.result.value
+                        let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
+                        switch response.result {
+                        case .Success:
+                            successBlock(responseString)
+                        case .Failure(let error):
+                            failedBlock(responseString, error)
+                        }
+                }
     }
     
+    //MARK:  manager set
+    private func passCertificate() -> Void {
+        let manager = Manager.sharedInstance
+        manager.delegate.sessionDidReceiveChallenge = { session, challenge in
+            var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
+            var credential: NSURLCredential?
+            
+            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+                disposition = NSURLSessionAuthChallengeDisposition.UseCredential
+                credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
+            } else {
+                if challenge.previousFailureCount > 0 {
+                    disposition = .CancelAuthenticationChallenge
+                } else {
+                    credential = manager.session.configuration.URLCredentialStorage?.defaultCredentialForProtectionSpace(challenge.protectionSpace)
+                    
+                    if credential != nil {
+                        disposition = .UseCredential
+                    }
+                }
+            }
+            return (disposition, credential)
+        }
+    }
 }
 
 

@@ -31,7 +31,6 @@ public class ResultDataModel: NSObject {
     
     //MARK: serialization
     public static func initWithDictionary(dict:NSDictionary?, reqestType:Int) -> ResultDataModel{
-        
         let resultDataModelObject:ResultDataModel = ResultDataModel();
         if (dict == nil || (dict?.isKindOfClass(NSNull))!) {
             return resultDataModelObject
@@ -42,7 +41,7 @@ public class ResultDataModel: NSObject {
         
         resultDataModelObject.code = dict!["code"] != nil ? dict!["code"]!.integerValue : EMResultCode.EmCode_Success.rawValue;
         resultDataModelObject.data = dict!["data"] != nil ? dict!["data"] : dict!;
-        resultDataModelObject.message = dict!["message"] as? String ?? "unkonw"
+        resultDataModelObject.message = dict!["message"] as? String ?? ""
         resultDataModelObject.type = reqestType
         
         if resultDataModelObject.code != EMResultCode.EmCode_Success.rawValue {
@@ -51,21 +50,22 @@ public class ResultDataModel: NSObject {
         
         return resultDataModelObject;
     }
-    public static func initWithErrorInfo(error:NSError?, reqestType:Int) -> ResultDataModel{
+    public static func initWithErrorInfo(dict:NSDictionary?, error:NSError?, reqestType:Int) -> ResultDataModel{
         let resultDataModelObject:ResultDataModel = ResultDataModel();
         
         resultDataModelObject.type = reqestType
         resultDataModelObject.code = error!.code
-        
-        switch resultDataModelObject.code {
+        if (error?.userInfo["StatusCode"])! as! NSObject == 400 {
+            resultDataModelObject.message = dict!["error_description"] as! String ?? ""
+        }
+        else{
+            switch resultDataModelObject.code {
             case NSURLErrorNotConnectedToInternet:
                 resultDataModelObject.message = "亲，你的网络不给力，请检查网络!"
-            case NSURLErrorBadServerResponse:
-                resultDataModelObject.message = "待解析!"
             default:
                 resultDataModelObject.message = "亲，数据获取失败，请重试!"
             }
-            
+        }
         return resultDataModelObject;
     }
     

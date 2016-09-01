@@ -40,16 +40,13 @@ public class NetInterfaceManager: NSObject {
         if (url == nil || url!.characters.count <= 0) {
             return ;
         }
-        
         var bodyDic:NSDictionary = [:];
         if params.data != nil {
-            bodyDic = (params.data as? NSDictionary)!
+            bodyDic = params.data as! NSDictionary
         }
         
-        self.httpRequst(params.method!, strUrl: url!, body:bodyDic, isHttps: isHttps, requestType: type)
+        self.httpRequst(params.method!, strUrl:url!, body:bodyDic, isHttps:isHttps, requestType:type)
     }
-    
-    
     
     public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void), _ isHttps:Bool = false) -> Void{
         let params:NetParams = NetParams.init()
@@ -62,13 +59,14 @@ public class NetInterfaceManager: NSObject {
         
         var bodyDic:NSDictionary = [:];
         if params.data != nil {
-            bodyDic = (params.data as? NSDictionary)!
+            bodyDic = params.data as! NSDictionary
         }
         
-        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl: url!, body: bodyDic as! [String:AnyObject] , isHttps: true, successBlock: { (msg) in
-            self.successHander(msg, reqestType: type)
-            }, failedBlock: { (error) in
-                self.failedHander(error, reqestType: type)
+        print("<- \(__FUNCTION__) ->\n" + "   url:\(url!)\n" + "   body:\(bodyDic)\n" + "   isHttps:\(isHttps)\n");
+        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject] , isHttps: isHttps, successBlock: { (msg) in
+                self.successHander(msg, reqestType: type)
+            }, failedBlock: { (msg, error) in
+                self.failedHander(msg, error: error, reqestType: type)
             }, true)
     
     }
@@ -77,9 +75,9 @@ public class NetInterfaceManager: NSObject {
     public func uploadImage(strurl:String,
                             img:UIImage,
                             body:NSDictionary?,
-                            suceeseBlock:((msg:String) -> Void),
-                            failedBlock:((error:NSError)->Void)) -> Void{
-        NetInterface.shareInstance.uploadImage(strurl, body:body!, img: img, successBlock: suceeseBlock, failedBlock: failedBlock)
+                            successBlock:((String) ->Void),
+                            failedBlock:((NSString, NSError) ->Void))->Void{
+        NetInterface.shareInstance.uploadImage(strurl, body: body!, img: img, successBlock: successBlock, failedBlock: failedBlock)
     }
     
     //MARK: Private Request
@@ -92,36 +90,22 @@ public class NetInterfaceManager: NSObject {
         print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
         NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
             self.successHander(msg, reqestType: requestType)
-            }, failedBlock: { (error) in
-                self.failedHander(error, reqestType: requestType)
+            }, failedBlock: { (msg, error) in
+                self.failedHander(msg, error: error, reqestType: requestType)
             }, false)
     }
-//    private func httpPostFormRequest(strUrl:String,
-//                                    body:NSDictionary,
-//                                    isHttps:Bool,
-//                                    requestType:Int) -> Void{
-//        print("<- \(__FUNCTION__) ->\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
-//        NetInterface.shareInstance.httpRequest(.EMRequstMethod_POST, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
-//            self.successHander(msg, reqestType: requestType)
-//            }, failedBlock: { (error) in
-//                self.failedHander(error, reqestType: requestType)
-//            }, true)
-//    }
-    
-    
     //返回成功处理
     private func successHander(msg:String, reqestType:Int) ->Void{
-        print("<- \(__FUNCTION__) ->\n   msg:\(msg)\n" + "   reqestType:\(reqestType)");
-        var error:NSError?
         let data:NSData = msg.dataUsingEncoding(NSUTF8StringEncoding)!
         let dict:NSDictionary?
         do{
             dict = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as! NSDictionary
         }
         catch{
-            dict = ["":""]
+            dict = [:]
         }
         let result:ResultDataModel = ResultDataModel.initWithDictionary(dict, reqestType: reqestType)
+        print("<- \(__FUNCTION__) ->\n   result:\(msg)\n" + "   reqestType:\(reqestType)");
         if result.code == EMResultCode.EmCode_Success.rawValue {
             dispatch_async(dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(KNotification_RequestFinished, object: result)
@@ -135,10 +119,18 @@ public class NetInterfaceManager: NSObject {
     
     }
     //返回失败处理
-    private func failedHander(error:NSError, reqestType:Int) ->Void{
-        print("<- \(__FUNCTION__) ->\n   error:\(error)\n" + "   reqestType:\(reqestType)");
+    private func failedHander(msg:String, error:NSError, reqestType:Int) ->Void{
+        let data:NSData = msg.dataUsingEncoding(NSUTF8StringEncoding)!
+        let dict:NSDictionary?
+        do{
+            dict = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as! NSDictionary
+        }
+        catch{
+            dict = [:]
+        }
+        print("<- \(__FUNCTION__) ->\n   error:\(error)\n   msg:\(dict)" + "   reqestType:\(reqestType)");
         dispatch_async(dispatch_get_main_queue()) {
-            let result:ResultDataModel = ResultDataModel.initWithErrorInfo(error, reqestType: reqestType)
+            let result:ResultDataModel = ResultDataModel.initWithErrorInfo(dict!, error: error, reqestType: reqestType)
             if result.code == EMResultCode.EmCode_TokenOverdue.rawValue{
                 NSNotificationCenter.defaultCenter().postNotificationName(KNotification_AuthenticationFail, object: result)
             }
