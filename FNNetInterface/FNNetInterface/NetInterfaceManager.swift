@@ -44,7 +44,11 @@ public class NetInterfaceManager: NSObject {
             bodyDic = params.data as! NSDictionary
         }
         
-        self.httpRequst(params.method!, strUrl:url!, body:bodyDic, requestType:type)
+        NetInterface.shareInstance.httpRequest(params.method!, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
+                self.successHander(msg, reqestType: type)
+            }, failedBlock: { (msg, error) in
+                self.failedHander(msg, error: error, reqestType: type)
+        })
     }
     
     public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void)) -> Void{
@@ -55,18 +59,16 @@ public class NetInterfaceManager: NSObject {
         if (url == nil || url!.characters.count <= 0) {
             return ;
         }
-        
         var bodyDic:NSDictionary = [:];
         if params.data != nil {
             bodyDic = params.data as! NSDictionary
         }
         
-        
-        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
+        NetInterface.shareInstance.httpFormRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
                 self.successHander(msg, reqestType: type)
             }, failedBlock: { (msg, error) in
                 self.failedHander(msg, error: error, reqestType: type)
-            }, true)
+            })
     
     }
     
@@ -75,21 +77,11 @@ public class NetInterfaceManager: NSObject {
                             img:UIImage,
                             body:NSDictionary?,
                             successBlock:((String) ->Void),
-                            failedBlock:((NSString, NSError) ->Void))->Void{
+                            failedBlock:((String, NSError) ->Void))->Void{
         NetInterface.shareInstance.uploadImage(strurl, body: body!, img: img, successBlock: successBlock, failedBlock: failedBlock)
     }
     
-    //MARK: Private Request
-    private func httpRequst(requestMothed:EMRequstMethod,
-                        strUrl:String,
-                        body:NSDictionary?,
-                        requestType:Int) -> Void{
-        NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], successBlock: { (msg) in
-            self.successHander(msg, reqestType: requestType)
-            }, failedBlock: { (msg, error) in
-                self.failedHander(msg, error: error, reqestType: requestType)
-            }, false)
-    }
+    //MARK: Private
     //返回成功处理
     private func successHander(msg:String, reqestType:Int) ->Void{
         let data:NSData = msg.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -148,7 +140,11 @@ public class NetInterfaceManager: NSObject {
     
     private func reloadRecordData()->Void{
         if (recordUrl != nil && recordBody != nil) {
-            self.httpRequst(recordRequestMothed, strUrl: recordUrl!, body: recordBody!, requestType: recordRequestType)
+            NetInterface.shareInstance.httpFormRequest(recordRequestMothed, strUrl:recordUrl!, body:recordBody! as! [String : AnyObject], successBlock: { (msg) in
+                    self.successHander(msg, reqestType:self.recordRequestType)
+                }, failedBlock: { (msg, error) in
+                    self.failedHander(msg, error: error, reqestType:self.recordRequestType)
+            })
         }
     }
     

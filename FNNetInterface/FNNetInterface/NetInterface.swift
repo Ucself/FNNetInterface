@@ -22,72 +22,76 @@ public class NetInterface: NSObject {
     }
 
     //MARK: Request
+    //普通数据提交
     public func httpRequest(requstMethod:EMRequstMethod,
                             strUrl:String,
                             body :[String: AnyObject]?,
                             successBlock:((String) ->Void),
-                            failedBlock:((String, NSError) ->Void),
-                            _ isForm: Bool = false) ->Void {
-        //证书绕过验证
-        if isForm {
-            httpHeader["Content-Type"] = "application/x-www-form-urlencoded"
-        }
-        else{
-            httpHeader["Content-Type"] = "text/html"
-        }
-        let postRequest:Request?;
+                            failedBlock:((String, NSError) ->Void)) ->Void {
+        var  alamofireRequestMethod:Method = .GET
+        httpHeader["Content-Type"] = "text/html"
         switch requstMethod {
         case .EMRequstMethod_GET:
-            postRequest = Manager.sharedInstance.request(.GET,strUrl, parameters:body, headers: httpHeader);
+            alamofireRequestMethod = .GET
         case .EMRequstMethod_POST:
-            postRequest = Manager.sharedInstance.request(.POST,strUrl, parameters:body, headers: httpHeader);
+            alamofireRequestMethod = .POST
         case .EMRequstMethod_PUT:
-            postRequest = Manager.sharedInstance.request(.PUT,strUrl, parameters:body, headers: httpHeader);
+            alamofireRequestMethod = .PUT
         case .EMRequstMethod_DELETE:
-            postRequest = Manager.sharedInstance.request(.DELETE,strUrl, parameters:body, headers: httpHeader);
-            
+            alamofireRequestMethod = .DELETE
         }
-        print("-----> \(postRequest)\n")
-        postRequest!.validate(statusCode: 200..<300)
-                    .responseData { (response) in
-                        let responseData = response.data
-                        let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
-                        switch response.result {
-                        case .Success:
-                            successBlock(responseString)
-                            print("-----> success:\(responseString)\n")
-                        case .Failure(let error):
-                            failedBlock(responseString, error)
-                            print("-----> error:\(error)\n")
-                        }
-                    }
+        let requestObj:Request = Manager.sharedInstance.request(alamofireRequestMethod,strUrl, parameters:body, headers: httpHeader);
+        //处理响应数据
+        self.responseOperation(requestObj, successBlock: successBlock, failedBlock: failedBlock)
     }
+    //From提交
+    public func httpFormRequest(requstMethod:EMRequstMethod,
+                            strUrl:String,
+                            body :[String: AnyObject]?,
+                            successBlock:((String) ->Void),
+                            failedBlock:((String, NSError) ->Void)) ->Void {
+        var  alamofireRequestMethod:Method = .POST
+        httpHeader["Content-Type"] = "application/x-www-form-urlencoded"
+        let requestObj:Request = Manager.sharedInstance.request(alamofireRequestMethod,strUrl, parameters:body, headers: httpHeader);
+        //处理响应数据
+        self.responseOperation(requestObj, successBlock: successBlock, failedBlock: failedBlock)
+    }
+    //上传图片
     public func uploadImage(strUrl:String,
                             body:NSDictionary?,
                             img:UIImage,
                             successBlock:((String) ->Void),
-                            failedBlock:((NSString, NSError) ->Void))->Void{
+                            failedBlock:((String, NSError) ->Void))->Void{
         let dataValue : NSData = UIImageJPEGRepresentation(img, 0.5)!
         httpHeader["Content-Type"] = "image/jpeg"
-        let postRequest:Request = Manager.sharedInstance.upload(.POST, strUrl, headers: httpHeader, data:dataValue)
-        print("-----> \(postRequest)\n")
-        //数据返回
-        postRequest.validate(statusCode: 200..<300)
-                   .responseData { (response) in
-                        let responseData = response.data
-                        let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
-                        switch response.result {
-                        case .Success:
-                            successBlock(responseString)
-                            print("-----> success:\(responseString)\n")
-                        case .Failure(let error):
-                            failedBlock(responseString, error)
-                            print("-----> error:\(error)\n")
-                        }
-                }
+        let requestObj:Request = Manager.sharedInstance.upload(.POST, strUrl, headers: httpHeader, data:dataValue)
+        //处理响应数据
+        self.responseOperation(requestObj, successBlock: successBlock, failedBlock: failedBlock)
     }
     
-    //MARK:  manager set
+    //MARK: Private
+    //处理响应数据
+    private func responseOperation(requestObj:Request,
+                                   successBlock:((String) ->Void),
+                                   failedBlock:((String, NSError) ->Void)) ->Void{
+        print("-----> \(requestObj.debugDescription)\n")
+        //数据返回
+        requestObj.validate(statusCode: 200..<300)
+            .responseData { (response) in
+                let responseData = response.data
+                let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
+                switch response.result {
+                case .Success:
+                    successBlock(responseString)
+                    print("-----> success:\(responseString)\n")
+                case .Failure(let error):
+                    failedBlock(responseString, error)
+                    print("-----> error:\(error)\n")
+                }
+        }
+    }
+    
+    //绕过证书
     private func passCertificate() -> Self  {
         let manager = Manager.sharedInstance
         manager.delegate.sessionDidReceiveChallenge = { session, challenge in
