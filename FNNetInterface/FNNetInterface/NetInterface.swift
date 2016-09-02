@@ -11,7 +11,7 @@ import UIKit
 
 public class NetInterface: NSObject {
     //单例 
-    public static let shareInstance = NetInterface()
+    public static let shareInstance = NetInterface().passCertificate()
     private override init() { super.init() }
     
     //httpHeader鉴权字典
@@ -25,14 +25,10 @@ public class NetInterface: NSObject {
     public func httpRequest(requstMethod:EMRequstMethod,
                             strUrl:String,
                             body :[String: AnyObject]?,
-                            isHttps:Bool,
                             successBlock:((String) ->Void),
                             failedBlock:((String, NSError) ->Void),
                             _ isForm: Bool = false) ->Void {
         //证书绕过验证
-        if isHttps {
-            self.passCertificate();
-        }
         if isForm {
             httpHeader["Content-Type"] = "application/x-www-form-urlencoded"
         }
@@ -86,7 +82,7 @@ public class NetInterface: NSObject {
     }
     
     //MARK:  manager set
-    private func passCertificate() -> Void {
+    private func passCertificate() -> Self  {
         let manager = Manager.sharedInstance
         manager.delegate.sessionDidReceiveChallenge = { session, challenge in
             var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
@@ -108,6 +104,8 @@ public class NetInterface: NSObject {
             }
             return (disposition, credential)
         }
+        
+        return self;
     }
 }
 

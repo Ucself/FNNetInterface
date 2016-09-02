@@ -58,13 +58,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             NetInterfaceManager.shareInstance.sendRequstWithType(requsetType.POSTTest.rawValue, block: { (params) in
                 params.method = .EMRequstMethod_POST
                 params.data = ["phone":"18081003937",
-                    "vcode":"123805",
+                    "vcode":"987654sd",
                     "grant_type":"totp",
                     "client_id":"0791b17234b14946bf8c6e5406e0bf9e",
                     "client_secret":"33_4gOkGBiZgUwhQUdUVxi-QCIqPkQMYvcYZ3e3ao4s",
                     "registration_id":"E87DB0BA1F76428",
                     "terminal_type":"android"]
-                },true)
+                })
         case "HTTPS->Form":
             NetInterfaceManager.shareInstance.sendFormRequstWithType(requsetType.HTTPSFromTest.rawValue, block: { (params) in
                 params.method = .EMRequstMethod_POST
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     "client_secret":"33_4gOkGBiZgUwhQUdUVxi-QCIqPkQMYvcYZ3e3ao4s",
                     "registration_id":"E87DB0BA1F76428",
                     "terminal_type":"android"]
-                }, true)
+                })
         case "BaiDu乱字符串":
             NetInterfaceManager.shareInstance.sendRequstWithType(requsetType.GETBaiDu.rawValue, block: { (params) in
                 params.method = .EMRequstMethod_GET

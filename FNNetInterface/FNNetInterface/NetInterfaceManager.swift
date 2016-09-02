@@ -25,14 +25,13 @@ public class NetInterfaceManager: NSObject {
     private var recordRequestType:Int = 0
     private var recordRequestMothed:EMRequstMethod = .EMRequstMethod_GET
     private var controllerId:String?
-    private var recordIsHttps:Bool = false
     
     public func setAuthorization(httpHeader:[String:String]) -> Void{
         NetInterface.shareInstance.setAuthorization(httpHeader)
     }
     
     //MARK: Request
-    public func sendRequstWithType(type:Int,block:((params:NetParams)->Void), _ isHttps:Bool = false) -> Void{
+    public func sendRequstWithType(type:Int,block:((params:NetParams)->Void)) -> Void{
         let params:NetParams = NetParams.init()
         
         block(params: params);
@@ -45,10 +44,10 @@ public class NetInterfaceManager: NSObject {
             bodyDic = params.data as! NSDictionary
         }
         
-        self.httpRequst(params.method!, strUrl:url!, body:bodyDic, isHttps:isHttps, requestType:type)
+        self.httpRequst(params.method!, strUrl:url!, body:bodyDic, requestType:type)
     }
     
-    public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void), _ isHttps:Bool = false) -> Void{
+    public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void)) -> Void{
         let params:NetParams = NetParams.init()
         
         block(params: params);
@@ -62,8 +61,8 @@ public class NetInterfaceManager: NSObject {
             bodyDic = params.data as! NSDictionary
         }
         
-        print("<- \(__FUNCTION__) ->\n" + "   url:\(url!)\n" + "   body:\(bodyDic)\n" + "   isHttps:\(isHttps)\n");
-        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject] , isHttps: isHttps, successBlock: { (msg) in
+        print("<- \(#function) ->\n" + "   url:\(url!)\n" + "   body:\(bodyDic)\n");
+        NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
                 self.successHander(msg, reqestType: type)
             }, failedBlock: { (msg, error) in
                 self.failedHander(msg, error: error, reqestType: type)
@@ -84,11 +83,10 @@ public class NetInterfaceManager: NSObject {
     private func httpRequst(requestMothed:EMRequstMethod,
                         strUrl:String,
                         body:NSDictionary?,
-                        isHttps:Bool,
                         requestType:Int) -> Void{
         
-        print("<- \(__FUNCTION__) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n" + "   isHttps:\(isHttps)\n");
-        NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], isHttps: isHttps, successBlock: { (msg) in
+        print("<- \(#function) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n");
+        NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], successBlock: { (msg) in
             self.successHander(msg, reqestType: requestType)
             }, failedBlock: { (msg, error) in
                 self.failedHander(msg, error: error, reqestType: requestType)
@@ -105,7 +103,7 @@ public class NetInterfaceManager: NSObject {
             dict = [:]
         }
         let result:ResultDataModel = ResultDataModel.initWithDictionary(dict, reqestType: reqestType)
-        print("<- \(__FUNCTION__) ->\n   result:\(msg)\n" + "   reqestType:\(reqestType)");
+        print("<- \(#function) ->\n   result:\(msg)\n" + "   reqestType:\(reqestType)");
         if result.code == EMResultCode.EmCode_Success.rawValue {
             dispatch_async(dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(KNotification_RequestFinished, object: result)
@@ -128,7 +126,7 @@ public class NetInterfaceManager: NSObject {
         catch{
             dict = [:]
         }
-        print("<- \(__FUNCTION__) ->\n   error:\(error)\n   msg:\(dict)" + "   reqestType:\(reqestType)");
+        print("<- \(#function) ->\n   error:\(error)\n   msg:\(dict)" + "   reqestType:\(reqestType)");
         dispatch_async(dispatch_get_main_queue()) {
             let result:ResultDataModel = ResultDataModel.initWithErrorInfo(dict!, error: error, reqestType: reqestType)
             if result.code == EMResultCode.EmCode_TokenOverdue.rawValue{
@@ -143,18 +141,17 @@ public class NetInterfaceManager: NSObject {
     
     
     //MARK: recod
-    private func recodRequest(strUrl:String, body:NSDictionary, isHttps:Bool, requestType:Int, mothed:EMRequstMethod){
+    private func recodRequest(strUrl:String, body:NSDictionary, requestType:Int, mothed:EMRequstMethod){
         //记录一次请求数据
         recordUrl           = strUrl;
         recordBody          = body;
         recordRequestType   = requestType;
         recordRequestMothed = mothed;
-        recordIsHttps = isHttps;
     }
     
     private func reloadRecordData()->Void{
         if (recordUrl != nil && recordBody != nil) {
-            self.httpRequst(recordRequestMothed, strUrl: recordUrl!, body: recordBody!, isHttps:recordIsHttps,  requestType: recordRequestType)
+            self.httpRequst(recordRequestMothed, strUrl: recordUrl!, body: recordBody!, requestType: recordRequestType)
         }
     }
     

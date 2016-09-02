@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A12E8171D786AC600BC4060 /* FNNetInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A12E8161D786AC600BC4060 /* FNNetInterface.framework */; };
-		8A12E8181D786AC600BC4060 /* FNNetInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A12E8161D786AC600BC4060 /* FNNetInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ADE392CB1D7912A10011990E /* FNNetInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE392CA1D7912A10011990E /* FNNetInterface.framework */; };
+		ADE392CC1D7912A10011990E /* FNNetInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ADE392CA1D7912A10011990E /* FNNetInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADE95B0D1D7408FE003B416E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B0C1D7408FE003B416E /* AppDelegate.swift */; };
 		ADE95B0F1D7408FE003B416E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE95B0E1D7408FE003B416E /* ViewController.swift */; };
 		ADE95B121D7408FE003B416E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE95B101D7408FE003B416E /* Main.storyboard */; };
@@ -42,7 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8A12E8181D786AC600BC4060 /* FNNetInterface.framework in Embed Frameworks */,
+				ADE392CC1D7912A10011990E /* FNNetInterface.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,7 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8A12E8161D786AC600BC4060 /* FNNetInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FNNetInterface.framework; path = "/Users/libj/Library/Developer/Xcode/DerivedData/SwiftNet-cmvsswlpmikdorevirqzpcqoenfw/Build/Products/Debug-iphonesimulator/FNNetInterface.framework"; sourceTree = "<absolute>"; };
+		ADE392CA1D7912A10011990E /* FNNetInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FNNetInterface.framework; path = "/Users/yidafeiniu/Library/Developer/Xcode/DerivedData/SwiftNet-frgvagapsbxlqhfiqbqbzclfhuut/Build/Products/Debug-iphoneos/FNNetInterface.framework"; sourceTree = "<absolute>"; };
 		ADE95B091D7408FE003B416E /* FNProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FNProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE95B0C1D7408FE003B416E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE95B0E1D7408FE003B416E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A12E8171D786AC600BC4060 /* FNNetInterface.framework in Frameworks */,
+				ADE392CB1D7912A10011990E /* FNNetInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +95,7 @@
 		ADE95B001D7408FE003B416E = {
 			isa = PBXGroup;
 			children = (
-				8A12E8161D786AC600BC4060 /* FNNetInterface.framework */,
+				ADE392CA1D7912A10011990E /* FNNetInterface.framework */,
 				ADE95B0B1D7408FE003B416E /* FNProject */,
 				ADE95B201D7408FE003B416E /* FNProjectTests */,
 				ADE95B2B1D7408FE003B416E /* FNProjectUITests */,
