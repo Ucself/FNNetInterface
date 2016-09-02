@@ -47,6 +47,7 @@ public class NetInterface: NSObject {
             postRequest = Manager.sharedInstance.request(.DELETE,strUrl, parameters:body, headers: httpHeader);
             
         }
+        print("-----> \(postRequest)\n")
         postRequest!.validate(statusCode: 200..<300)
                     .responseData { (response) in
                         let responseData = response.data
@@ -54,8 +55,10 @@ public class NetInterface: NSObject {
                         switch response.result {
                         case .Success:
                             successBlock(responseString)
+                            print("-----> success:\(responseString)\n")
                         case .Failure(let error):
                             failedBlock(responseString, error)
+                            print("-----> error:\(error)\n")
                         }
                     }
     }
@@ -67,16 +70,19 @@ public class NetInterface: NSObject {
         let dataValue : NSData = UIImageJPEGRepresentation(img, 0.5)!
         httpHeader["Content-Type"] = "image/jpeg"
         let postRequest:Request = Manager.sharedInstance.upload(.POST, strUrl, headers: httpHeader, data:dataValue)
+        print("-----> \(postRequest)\n")
         //数据返回
         postRequest.validate(statusCode: 200..<300)
                    .responseData { (response) in
-                        let responseData = response.result.value
+                        let responseData = response.data
                         let responseString:String = NSString(data: responseData!, encoding: NSUTF8StringEncoding)! as String
                         switch response.result {
                         case .Success:
                             successBlock(responseString)
+                            print("-----> success:\(responseString)\n")
                         case .Failure(let error):
                             failedBlock(responseString, error)
+                            print("-----> error:\(error)\n")
                         }
                 }
     }

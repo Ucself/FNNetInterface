@@ -21,7 +21,7 @@ public enum EMResultCode:Int{
 
 public class ResultDataModel: NSObject {
     //请求接口类型
-    public var type:Int = 0
+    public var type:Int = -1
     //返回码
     public var code:Int = -1
     //消息内容

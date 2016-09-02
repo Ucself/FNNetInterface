@@ -61,7 +61,7 @@ public class NetInterfaceManager: NSObject {
             bodyDic = params.data as! NSDictionary
         }
         
-        print("<- \(#function) ->\n" + "   url:\(url!)\n" + "   body:\(bodyDic)\n");
+        
         NetInterface.shareInstance.httpRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
                 self.successHander(msg, reqestType: type)
             }, failedBlock: { (msg, error) in
@@ -84,8 +84,6 @@ public class NetInterfaceManager: NSObject {
                         strUrl:String,
                         body:NSDictionary?,
                         requestType:Int) -> Void{
-        
-        print("<- \(#function) ->\n   requstMethod:\(requestMothed)\n" + "   url:\(strUrl)\n" + "   body:\(body)\n");
         NetInterface.shareInstance.httpRequest(requestMothed, strUrl: strUrl, body: body as? [String : AnyObject], successBlock: { (msg) in
             self.successHander(msg, reqestType: requestType)
             }, failedBlock: { (msg, error) in
@@ -103,7 +101,6 @@ public class NetInterfaceManager: NSObject {
             dict = [:]
         }
         let result:ResultDataModel = ResultDataModel.initWithDictionary(dict, reqestType: reqestType)
-        print("<- \(#function) ->\n   result:\(msg)\n" + "   reqestType:\(reqestType)");
         if result.code == EMResultCode.EmCode_Success.rawValue {
             dispatch_async(dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(KNotification_RequestFinished, object: result)
@@ -126,7 +123,7 @@ public class NetInterfaceManager: NSObject {
         catch{
             dict = [:]
         }
-        print("<- \(#function) ->\n   error:\(error)\n   msg:\(dict)" + "   reqestType:\(reqestType)");
+        
         dispatch_async(dispatch_get_main_queue()) {
             let result:ResultDataModel = ResultDataModel.initWithErrorInfo(dict!, error: error, reqestType: reqestType)
             if result.code == EMResultCode.EmCode_TokenOverdue.rawValue{
