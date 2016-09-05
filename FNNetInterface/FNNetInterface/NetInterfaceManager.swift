@@ -32,39 +32,29 @@ public class NetInterfaceManager: NSObject {
     
     //MARK: Request
     public func sendRequstWithType(type:Int,block:((params:NetParams)->Void)) -> Void{
+        
         let params:NetParams = NetParams.init()
-        
         block(params: params);
-        let url:String? = UrlMaps.shareInstance.urlWithTypeNew(type);
-        if (url == nil || url!.characters.count <= 0) {
-            return ;
-        }
-        var bodyDic:NSDictionary = [:];
-        if params.data != nil {
-            bodyDic = params.data as! NSDictionary
-        }
+        guard let url:String? = UrlMaps.shareInstance.urlWithTypeNew(type) else {return}
         
-        NetInterface.shareInstance.httpRequest(params.method!, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
-                self.successHander(msg, reqestType: type)
+        let bodyDic:NSDictionary? = params.data as? NSDictionary
+        NetInterface.shareInstance.httpRequest(params.method!, strUrl:url!, body:bodyDic as? [String:AnyObject], successBlock: { (msg) in
+            self.successHander(msg, reqestType: type)
             }, failedBlock: { (msg, error) in
                 self.failedHander(msg, error: error, reqestType: type)
         })
+        
+        
     }
     
     public func sendFormRequstWithType(type:Int, block:((params:NetParams)->Void)) -> Void{
+        
         let params:NetParams = NetParams.init()
-        
         block(params: params);
-        let url:String? = UrlMaps.shareInstance.urlWithTypeNew(type);
-        if (url == nil || url!.characters.count <= 0) {
-            return ;
-        }
-        var bodyDic:NSDictionary = [:];
-        if params.data != nil {
-            bodyDic = params.data as! NSDictionary
-        }
+        guard let url:String? = UrlMaps.shareInstance.urlWithTypeNew(type) else {return}
         
-        NetInterface.shareInstance.httpFormRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as! [String:AnyObject], successBlock: { (msg) in
+        let bodyDic:NSDictionary? = params.data as? NSDictionary
+        NetInterface.shareInstance.httpFormRequest(EMRequstMethod.EMRequstMethod_POST, strUrl:url!, body:bodyDic as? [String:AnyObject], successBlock: { (msg) in
                 self.successHander(msg, reqestType: type)
             }, failedBlock: { (msg, error) in
                 self.failedHander(msg, error: error, reqestType: type)
